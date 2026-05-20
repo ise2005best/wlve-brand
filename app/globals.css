@@ -1,8 +1,21 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "The Seasons";
+  font-style: normal;
+  src: url('../public/fonts/Fontspring-DEMO-theseasons-reg.otf');
+}
+@font-face {
+  font-family: "The Seasons";
+  font-style: italic;
+  src: url('../public/fonts/Fontspring-DEMO-theseasons-it.otf');
+}
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary: #EEB738;
 }
 
 @theme inline {
@@ -10,12 +23,15 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-primary: #EEB738; 
+  --font-primary: "The Seasons", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
+    --primary: #EEB738;
   }
 }
 
