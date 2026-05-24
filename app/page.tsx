@@ -32,27 +32,36 @@ const App = () => {
   }, [emblaApi]);
 
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log(formData);
-    const response = await fetch("/api/email-signup", {
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try {
+    const signupRes = await fetch("/api/email-signup", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData),
     });
-    if (response.ok) {
-      const successData = await response.json();
-      setSubmitStatus({ success: true, message: successData.message });
-       setFormData({ email: "", phoneNumber: "" });
-    } else {
-      const data = await response.json();
-      console.log(data)
-      setSubmitStatus({ success: false, message: data.message || "An error occurred. Please try again." });
+
+    const signupData = await signupRes.json();
+
+    if (!signupRes.ok) {
+      setSubmitStatus({ success: false, message: signupData.message ?? "An error occurred. Please try again." });
+      return;
     }
-   
-  };
+
+    fetch("/api/resend", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: formData.email }),
+    }).catch(() => console.error("Failed to send confirmation email"));
+
+    setSubmitStatus({ success: true, message: signupData.message });
+    setFormData({ email: "", phoneNumber: "" });
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    setSubmitStatus({ success: false, message: "An error occurred. Please try again." });
+  }
+};
 
   return (
     <div className="min-h-screen bg-black flex flex-col md:flex-row">

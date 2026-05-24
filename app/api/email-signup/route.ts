@@ -60,7 +60,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: " Thank You For Registering with Wlve, we can&apos;t wait to unveil drop 001",
+      message: " Thank You For Registering with Wlve, we can't wait to unveil drop 001",
       user: data?.[0],
     }, { status: 201 });
 
