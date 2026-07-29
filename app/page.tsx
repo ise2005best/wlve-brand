@@ -29,7 +29,6 @@ export default async function AllProductsPage() {
       language: "EN",
     },
   });
-  console.log(data, errors);
   const products: AllProducts = data?.products;
 
   if (errors) {
