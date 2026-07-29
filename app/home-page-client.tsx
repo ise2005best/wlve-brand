@@ -5,8 +5,8 @@ const HomePage = ({products}: {products: AllProducts }) => {
 
     console.log(products)
     return(
-        <div className=""> 
-            <ShippingCountriesDropdown />
+        <div className="bg-white h-screen w-screen flex items-center justify-center"> 
+            {/* <ShippingCountriesDropdown /> */}
         </div>
     )
 }

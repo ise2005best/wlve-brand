@@ -15,6 +15,11 @@
   font-style: normal;
   src: url("/fonts/ClashDisplay-Medium.otf");
 }
+@font-face{
+  font-family: "Clash Display Regular";
+  font-style: normal;
+  src: url("/fonts/ClashDisplay-Regular.otf");
+}
 
 
 :root {
@@ -31,6 +36,7 @@
   --color-primary: #EEB738; 
   --font-primary: "The Seasons", sans-serif;
   --font-secondary: "Clash Display", sans-serif;
+  --font-secondary-regular: "Clash Display Regular", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
