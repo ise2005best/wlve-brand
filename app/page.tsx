@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import HomePage from "./home-page-client";
 import shopifyClient from "./utils/shopify";
@@ -21,15 +22,19 @@ export const metadata: Metadata = {
 };
 
 export default async function AllProductsPage() {
+  const cookieStore = await cookies();
+  const cookieCountry = cookieStore.get("country")?.value;
+  const country = cookieCountry && cookieCountry !== "null" ? cookieCountry : "GB";
+
   const { data, errors } = await shopifyClient.request(GETALLPRODUCTS, {
     variables: {
       first: 10,
       after: null,
-      country: "US",
+      country,
       language: "EN",
     },
   });
-  const products: AllProducts = data?.products;
+  const products: AllProducts = data;
 
   if (errors) {
     notFound();

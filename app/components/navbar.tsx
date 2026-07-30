@@ -14,14 +14,15 @@ export const Navbar = () => {
   const pathname = usePathname();
 
   return (
-    <div className="w-lg bg-black absolute z-50 mx-3 my-3 ">
+    <div className="md:w-lg w-fit bg-black absolute z-50 mx-3 my-3 ">
       <div className="flex w-full px-2 flex-row justify-between items-center ">
         <Image
           src="https://cdn.shopify.com/s/files/1/1047/8305/3145/files/Logo.png_1.png?v=1785324772"
           alt="Logo"
           width={100}
           height={100}
-          className="md:w-20 md:h-20 object-contain "
+          priority
+          className="md:w-20 md:h-20 w-16 h-16 object-contain "
         />
         <button
           type="button"
@@ -31,7 +32,7 @@ export const Navbar = () => {
           className="mr-2"
         >
           {isOpen ? (
-            <div className="relative mr-4 h-6 w-12">
+            <div className="relative mr-4 h-6 w-10">
               <span className="absolute right-0 top-1/2 h-px w-12 -translate-y-1/2 bg-white" />
             </div>
           ) : (
@@ -40,7 +41,7 @@ export const Navbar = () => {
               alt="Menu"
               width={100}
               height={100}
-              className="md:w-8 md:h-6 text-white"
+              className="md:w-10 md:h-6 w-8 h-4 text-white"
             />
           )}
         </button>

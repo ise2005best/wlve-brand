@@ -6,7 +6,7 @@
   src: url('/fonts/Fontspring-DEMO-theseasons-reg.otf');
 }
 @font-face {
-  font-family: "The Seasons";
+  font-family: "The Seasons Italic";
   font-style: italic;
   src: url('/fonts/Fontspring-DEMO-theseasons-it.otf');
 }
@@ -19,6 +19,11 @@
   font-family: "Clash Display Regular";
   font-style: normal;
   src: url("/fonts/ClashDisplay-Regular.otf");
+}
+@font-face{
+  font-family: "Clash Display Light";
+  font-style: normal;
+  src: url("/fonts/ClashDisplay-Light.otf");
 }
 
 
@@ -36,6 +41,7 @@
   --color-primary: #EEB738; 
   --font-primary: "The Seasons", sans-serif;
   --font-secondary: "Clash Display", sans-serif;
+  --font-secondary-light: "Clash Display Light", sans-serif;
   --font-secondary-regular: "Clash Display Regular", sans-serif;
 }
 

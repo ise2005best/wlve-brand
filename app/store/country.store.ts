@@ -12,7 +12,13 @@ export const useCountryStore = create(
     (set, get) => ({
       userCountry: null,
 
-      setUserCountry: (country: string) => set({ userCountry: country }),
+      setUserCountry: (country: string) => {
+        if (!country) return;
+        set({ userCountry: country });
+        if (typeof document !== "undefined") {
+          document.cookie = `country=${country}; path=/; max-age=31536000`;
+        }
+      },
 
       getUserCountry: () => get().userCountry,
     }),

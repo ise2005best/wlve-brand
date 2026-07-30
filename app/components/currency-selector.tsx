@@ -1,5 +1,6 @@
 "use client";
-import { useEffect, useState, Fragment } from "react";
+import { useEffect, useRef, useState, Fragment } from "react";
+import { useRouter } from "next/navigation";
 import { Listbox, Transition } from "@headlessui/react";
 import { useCountryStore } from "../store/country.store";
 import * as Flags from "country-flag-icons/react/3x2";
@@ -30,11 +31,13 @@ const getShippingCountries = async (): Promise<ShippingZonesResponse | null> => 
 };
 
 const ShippingCountriesDropdown = () => {
+  const router = useRouter();
   const [countries, setCountries] = useState<Country[]>([]);
   const [selectedCountry, setSelectedCountry] = useState<string | null>(null);
   const [userCountry, setUserCountry] = useState<string | null>(null);
   const setUserCountryStore = useCountryStore((state) => state.setUserCountry);
   const DEFAULT_COUNTRY = "GB"; // Set default country to GB
+  const hasSetDefaultCountry = useRef(false);
 
   // Render flag component dynamically
   const renderFlag = (countryCode: string) => {
@@ -46,7 +49,7 @@ const ShippingCountriesDropdown = () => {
     // Get the flag component from the imported flags
     const FlagComponent = Flags[code as keyof typeof Flags];
 
-    return FlagComponent ? <FlagComponent className="w-6 h-6 mb-1" /> : null;
+    return FlagComponent ? <FlagComponent className="w-5 h-5 sm:w-6 sm:h-6 mb-0.5 " /> : null;
   };
 
   useEffect(() => {
@@ -81,34 +84,41 @@ const ShippingCountriesDropdown = () => {
   }, [setUserCountryStore]);
 
   useEffect(() => {
-    // Set default country logic
-    if (countries.length > 0) {
-      // Check if GB is available in the shipping countries
-      const isGBAvailable = countries.some(
-        (country) => country.code === DEFAULT_COUNTRY,
-      );
+    // Set default country logic — only ever run once, so it doesn't
+    // override a selection the user makes afterwards.
+    if (hasSetDefaultCountry.current || countries.length === 0) return;
 
-      if (isGBAvailable) {
-        // Set GB as the default country
-        // setSelectedCountry(DEFAULT_COUNTRY);
-        setUserCountryStore(DEFAULT_COUNTRY);
-      } else if (
-        userCountry &&
-        countries.some((country) => country.code === userCountry)
-      ) {
-        // Fall back to user's country if GB is not available
-        setSelectedCountry(userCountry);
-      } else {
-        // Fall back to first country if neither GB nor user's country is available
-        setSelectedCountry(countries[0]?.code || null);
-      }
+    // Check if GB is available in the shipping countries
+    const isGBAvailable = countries.some(
+      (country) => country.code === DEFAULT_COUNTRY,
+    );
+
+    if (isGBAvailable) {
+      // Set GB as the default country
+      setSelectedCountry(DEFAULT_COUNTRY);
+      setUserCountryStore(DEFAULT_COUNTRY);
+    } else if (
+      userCountry &&
+      countries.some((country) => country.code === userCountry)
+    ) {
+      // Fall back to user's country if GB is not available
+      setSelectedCountry(userCountry);
+      setUserCountryStore(userCountry);
+    } else {
+      // Fall back to first country if neither GB nor user's country is available
+      const fallback = countries[0]?.code ?? null;
+      setSelectedCountry(fallback);
+      if (fallback) setUserCountryStore(fallback);
     }
+
+    hasSetDefaultCountry.current = true;
   }, [countries, userCountry, setUserCountryStore]);
 
   const handleCountryChange = (country: Country) => {
     setUserCountry(country.code);
     setSelectedCountry(country.code);
     setUserCountryStore(country.code);
+    router.refresh();
   };
 
   // Find the currently selected country object
@@ -121,11 +131,11 @@ const ShippingCountriesDropdown = () => {
   }
 
   return (
-    <div className="w-24 relative z-50 bg-[#F7F2F2] px-1 font-secondary ">
+    <div className="w-20 sm:w-24 relative z-50 bg-[#F7F2F2] font-secondary ">
       <Listbox value={currentCountry} onChange={handleCountryChange}>
         <div className="relative">
-          <Listbox.Button className="relative w-full cursor-pointer  px-2 py-3 text-left focus:outline-none flex items-center justify-center gap-2">
-            <span className="flex items-center gap-2 truncate text-black text-xl font-secondary ">
+          <Listbox.Button className="relative w-full cursor-pointer  py-1.5 sm:py-2 text-left focus:outline-none flex items-center justify-center gap-1.5 sm:gap-2">
+            <span className="flex items-center gap-1.5 sm:gap-2 truncate text-black text-base sm:text-lg md:text-xl font-secondary ">
               {renderFlag(currentCountry?.code)}
               {currentCountry?.code}
             </span>
@@ -136,22 +146,22 @@ const ShippingCountriesDropdown = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <Listbox.Options className="absolute right-0 z-10 mt-0.5 max-h-60 w-24 overflow-auto  bg-white py-1 text-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <Listbox.Options className="absolute right-0 bottom-full z-10 mb-0.5 max-h-60 w-20 sm:w-24 overflow-auto  bg-white py-1 text-sm sm:text-base md:text-lg shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
               {countries.map((country) => (
                 <Listbox.Option
                   key={country.code}
                   className={({ active }) =>
-                    `relative cursor-pointer select-none py-2 pl-3 pr-4 ${
+                    `relative cursor-pointer select-none py-1.5 sm:py-2 pl-2 sm:pl-3 pr-3 sm:pr-4 ${
                       active ? "bg-gray-100" : "text-black"
                     }`
                   }
                   value={country}
                 >
                   {({ selected }) => (
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1.5 sm:gap-2">
                       {renderFlag(country.code)}
                       <span
-                        className={`block truncate font-secondary text-lg ${selected ? "font-medium" : "font-normal"}`}
+                        className={`block truncate font-secondary ${selected ? "font-medium" : "font-normal"}`}
                       >
                         {country.code}
                       </span>
