@@ -33,7 +33,7 @@ const HomePage = ({ products }: { products: AllProducts }) => {
             WLVE
           </p>
         </div>
-        <div className="absolute bottom-10 right-5 z-10">
+        <div className="absolute md:block hidden bottom-10 right-5 z-10">
           <ShippingCountriesDropdown />
         </div>
       </div>
@@ -47,6 +47,9 @@ const HomePage = ({ products }: { products: AllProducts }) => {
             ))}
         </div>
       </div>
+       <div className="absolute block md:hidden bottom-10 right-5 z-10">
+          <ShippingCountriesDropdown />
+        </div>
     </div>
   );
 };

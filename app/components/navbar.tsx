@@ -48,8 +48,8 @@ export const Navbar = () => {
       </div>
 
       <div
-        className={`flex flex-col gap-6 px-4 text-white overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "max-h-2xl py-6 opacity-100" : "max-h-0 py-0 opacity-0"
+        className={`flex flex-col md:gap-6 gap-4 px-4 text-white overflow-hidden transition-all duration-300 ease-in-out ${
+          isOpen ? "md:max-h-2xl max-h-lg py-6 opacity-100" : "max-h-0 py-0 opacity-0"
         }`}
       >
         <nav className="flex flex-col gap-4">
@@ -70,7 +70,7 @@ export const Navbar = () => {
               </div>
             );
           })}
-          <div className="mt-10">
+          <div className="md:mt-10 mt-4">
             <p className="font-secondary-regular uppercase text-white text-sm md:text-base">
                 With Love
             </p>
@@ -79,7 +79,7 @@ export const Navbar = () => {
             alt="Logo"
             width={2500}
             height={2500}
-            className="md:w-full md:h-80 object-cover mt-6"
+            className="md:w-full md:h-80 h-40 object-cover mt-6"
             />
           </div>
         </nav>
