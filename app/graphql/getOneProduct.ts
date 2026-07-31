@@ -11,6 +11,8 @@ query GetFullProduct(
     description
     productType
     vendor
+    tags
+    totalInventory
     media(first: 20) {
       edges {
         node {
@@ -60,5 +62,22 @@ query GetFullProduct(
       value
       type
     }
+    metafield2: metafield(namespace: "custom", key: "size_guide") {
+      id
+      key
+      namespace
+      value
+      type
+        reference {
+    ... on MediaImage {
+      image {
+        url
+        altText
+        width
+        height
+      }
+    }
   }
-}`
+    }
+  }
+}`;

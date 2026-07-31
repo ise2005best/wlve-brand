@@ -6,6 +6,11 @@
   src: url('/fonts/Fontspring-DEMO-theseasons-reg.otf');
 }
 @font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  src: url('/fonts/PlusJakartaSans-VariableFont_wght.ttf');
+}
+@font-face {
   font-family: "The Seasons Italic";
   font-style: italic;
   src: url('/fonts/Fontspring-DEMO-theseasons-it.otf');
@@ -43,6 +48,7 @@
   --font-secondary: "Clash Display", sans-serif;
   --font-secondary-light: "Clash Display Light", sans-serif;
   --font-secondary-regular: "Clash Display Regular", sans-serif;
+  --font-tertiary: "Plus Jakarta Sans", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {

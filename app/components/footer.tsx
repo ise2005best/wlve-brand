@@ -4,14 +4,17 @@ import Image from "next/image";
 const Footer = () => {
   return (
     <div className="md:mx-6 mx-3 py-6">
-      <div className="flex md:flex-row flex-col justify-between items-start md:items-center mb-10">
+      <div className="flex md:flex-row flex-col w-full justify-between items-start md:items-center mb-10">
         <p className="max-w-xl font-secondary md:text-6xl text-4xl leading-none uppercase">
           For Endless Summer Days.
         </p>
-        <div className="flex items-start w-full flex-col md:gap-0 gap-1 mt-8 md:mt-0">
-          <p className="font-secondary md:text-3xl text-2xl leading-none uppercase">
-            Be a Wlve Girl
-          </p>
+        <div className="flex items-start w-full md:w-fit flex-col md:gap-0 gap-1 mt-8 md:mt-0">
+          <div>
+            <p className="font-secondary md:text-3xl text-2xl leading-none uppercase">
+              Be a Wlve Girl
+            </p>
+          </div>
+
           <p className="font-secondary-regular md:text-xl text-lg leading-none uppercase">
             Gain Early Access to Drops
           </p>
@@ -65,7 +68,7 @@ const Footer = () => {
           priority
           className="md:object-cover h-full object-cover"
         />
-         <div className="absolute bottom-0 left-1/2 -translate-x-1/2">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2">
           <p className="font-primary h-fit w-fit font-light lg:text-[400px] text-9xl uppercase leading-none">
             WLVE
           </p>
