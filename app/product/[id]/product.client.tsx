@@ -10,7 +10,7 @@ const ProductClient = ({ product }: { product: OneProduct }) => {
   const [selectedVariantId, setselectedVariantId] = useState<string>(
     productDetails.variants.edges[0].node.id,
   );
-  const [openSection, setOpenSection] = useState<string | null>(null);
+  const [openAccordion, setOpenAccordion] = useState<string | null>(null);
   const images = productDetails.media.edges.slice(1);
   const price = productDetails.variants.edges[0].node.price.amount;
 
@@ -39,9 +39,9 @@ const ProductClient = ({ product }: { product: OneProduct }) => {
     product,
     price,
     selectedVariantId,
-    openSection,
-    onToggleSection: (id) =>
-      setOpenSection((prev) => (prev === id ? null : id)),
+    openSection: openAccordion,
+    onToggleAccordion: (id) =>
+      setOpenAccordion((prev) => (prev === id ? null : id)),
     onSelectVariant: setselectedVariantId,
   };
 
@@ -134,6 +134,7 @@ const ProductClient = ({ product }: { product: OneProduct }) => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };

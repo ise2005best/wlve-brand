@@ -1,17 +1,30 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useCartStore } from "../store/cart.store";
 
-const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/cart", label: "Cart" },
-];
+
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
   const pathname = usePathname();
+  const { cartItems } = useCartStore();
+  
+  const cartTotal = cartItems.reduce((total, item) => total + item.quantity, 0);
+
+  // The cart is persisted to sessionStorage, so it is empty during SSR.
+  // Only render the count once mounted to avoid a hydration mismatch.
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  const NAV_LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/cart", label: `Cart ${cartTotal > 0 ? `(${cartTotal})` : ""}` },
+];
 
   return (
     <div className="md:w-lg w-fit bg-black absolute z-50 mx-3 my-3 ">
@@ -39,13 +52,20 @@ export const Navbar = () => {
               <span className="absolute right-0 top-1/2 h-px w-12 -translate-y-1/2 bg-white" />
             </div>
           ) : (
-            <Image
-              src="/assets/image.png"
-              alt="Menu"
-              width={100}
-              height={100}
-              className="md:w-10 md:h-6 w-8 h-4 text-white"
-            />
+            <div className="relative">
+              <Image
+                src="/assets/image.png"
+                alt="Menu"
+                width={100}
+                height={100}
+                className="md:w-10 md:h-6 w-8 h-4 text-white"
+              />
+              {isMounted && cartTotal > 0 && (
+                <span className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-white text-[10px] font-secondary-regular leading-none text-black">
+                  {cartTotal}
+                </span>
+              )}
+            </div>
           )}
         </button>
       </div>

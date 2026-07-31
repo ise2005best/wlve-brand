@@ -7,13 +7,14 @@ import { useState } from "react";
 import Image from "next/image";
 import { cartProps } from "@/app/store/cart.interface";
 import { useCartStore } from "@/app/store/cart.store";
+import ProductAddedModal from "./product-added.modal";
 
 export interface InfoPanelProps {
   product: OneProduct;
   price: string;
   selectedVariantId: string | null;
   openSection: string | null;
-  onToggleSection: (id: string) => void;
+  onToggleAccordion: (id: string) => void;
   onSelectVariant: (variantId: string) => void;
 }
 
@@ -22,14 +23,15 @@ const ProductInformation = ({
   price,
   selectedVariantId,
   openSection,
-  onToggleSection,
+  onToggleAccordion,
   onSelectVariant,
 }: InfoPanelProps) => {
   const productDetails = product.product;
   const [quantity, setQuantity] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState<string>(
     productDetails.variants.edges[0].node.title,
-  )
+  );
   const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
   const { addToCart, updateItemQuantity } = useCartStore();
@@ -66,6 +68,7 @@ const ProductInformation = ({
   console.log(selectedVariant, "selectedVariant");
 
   const addItemToCart = () => {
+    setIsModalOpen(true);
     addToCart(cartItem);
     setIsAdded(true);
     setTimeout(() => setIsAdded(false), 2000);
@@ -126,7 +129,7 @@ const ProductInformation = ({
                   onClick={() => setShowSizeGuide(true)}
                   className="md:text-md text-sm font-secondary-regular capitalize underline text-[#010101]/60 hover:text-[#010101]"
                 >
-                    View Size Guide
+                  View Size Guide
                 </button>
               )}
             </div>
@@ -192,10 +195,12 @@ const ProductInformation = ({
         {sections.map((section) => (
           <div key={section.id} className="border-b border-black">
             <button
-              onClick={() => onToggleSection(section.id)}
+              onClick={() => onToggleAccordion(section.id)}
               className="w-full flex justify-between items-center py-3 text-sm text-[#1a1108] font-medium uppercase"
             >
-              <span className=" font-secondary-regular text-base">{section.label}</span>
+              <span className=" font-secondary-regular text-base">
+                {section.label}
+              </span>
               {openSection === section.id ? (
                 <GoDash className="w-6 h-6 text-secondary transition-transform duration-200" />
               ) : (
@@ -207,11 +212,18 @@ const ProductInformation = ({
                 {Array.isArray(section.content) ? (
                   <ul className="list-disc list-inside space-y-1">
                     {section.content.map((item: string, i: number) => (
-                      <li className="font-secondary-regular text-sm text-[#010101]/80" key={i}>{item}</li>
+                      <li
+                        className="font-secondary-regular text-sm text-[#010101]/80"
+                        key={i}
+                      >
+                        {item}
+                      </li>
                     ))}
                   </ul>
                 ) : (
-                  <p className="font-secondary-regular text-sm text-[#010101]/80">{section.content}</p>
+                  <p className="font-secondary-regular text-sm text-[#010101]/80">
+                    {section.content}
+                  </p>
                 )}
               </div>
             )}
@@ -226,7 +238,9 @@ const ProductInformation = ({
         >
           <div
             className="relative w-full max-w-lg max-h-[90vh] bg-white"
-            style={{ aspectRatio: `${sizeGuideImage.width}/${sizeGuideImage.height}` }}
+            style={{
+              aspectRatio: `${sizeGuideImage.width}/${sizeGuideImage.height}`,
+            }}
             onClick={(e) => e.stopPropagation()}
           >
             <button
@@ -246,6 +260,16 @@ const ProductInformation = ({
           </div>
         </div>
       )}
+      <ProductAddedModal
+        imageUrl={
+          productDetails.media.edges[1]?.node.image?.url ?? "/placeholder.jpg"
+        }
+        productName={productDetails.title}
+        variantId={selectedVariantId || ""}
+        quantity={quantity}
+        setIsOpen={setIsModalOpen}
+        isOpen={isModalOpen}
+      />
     </div>
   );
 };
