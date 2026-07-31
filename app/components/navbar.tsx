@@ -49,7 +49,7 @@ export const Navbar = () => {
         >
           {isOpen ? (
             <div className="relative mr-4 h-6 w-10">
-              <span className="absolute right-0 top-1/2 h-px w-12 -translate-y-1/2 bg-white" />
+              <span className="absolute right-0 top-1/2 h-px md:w-10 w-8 -translate-y-1/2 bg-white" />
             </div>
           ) : (
             <div className="relative">

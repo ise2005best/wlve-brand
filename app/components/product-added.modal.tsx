@@ -61,7 +61,7 @@ export const ProductAddedModal = ({
               <p className="font-secondary-regular md:text-xl text-sm capitalize">
                 Product added to cart
               </p>
-              <span className="h-px w-12 shrink-0 bg-white" />
+              <span className="h-px md:w-10 w-8 shrink-0 bg-white" />
             </div>
 
             <p className="font-secondary-regular md:text-base text-sm text-white/70 truncate">
