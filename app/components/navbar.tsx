@@ -27,7 +27,7 @@ export const Navbar = () => {
 ];
 
   return (
-    <div className="md:w-lg w-fit bg-black absolute z-50 mx-3 my-3 ">
+    <div className="md:w-lg w-fit bg-black fixed z-50 mx-3 my-3 ">
       <div className="flex w-full px-2 flex-row justify-between items-center ">
         <Link href="/">
           <Image

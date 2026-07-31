@@ -43,7 +43,7 @@ export const ProductAddedModal = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed z-50 left-3 top-19 md:top-25 w-[calc(100%-1.5rem)] md:w-lg bg-black text-white">
+    <div className="fixed z-50 left-3 top-21 md:top-25 w-[calc(100%-1.5rem)] md:w-lg bg-black text-white">
         <div className="flex flex-row gap-4 p-4">
           <div className="relative w-20 md:w-24 shrink-0 bg-white/10 aspect-9/12">
             {imageUrl && (

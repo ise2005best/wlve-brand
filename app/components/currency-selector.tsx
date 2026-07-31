@@ -131,7 +131,7 @@ const ShippingCountriesDropdown = () => {
   }
 
   return (
-    <div className="w-20 sm:w-24 relative z-50 bg-[#F7F2F2] font-secondary ">
+    <div className="w-20 sm:w-24 fixed bottom-5 right-5 z-50 bg-[#F7F2F2] shadow-lg font-secondary ">
       <Listbox value={currentCountry} onChange={handleCountryChange}>
         <div className="relative">
           <Listbox.Button className="relative w-full cursor-pointer  py-1.5 sm:py-2 text-left focus:outline-none flex items-center justify-center gap-1.5 sm:gap-2">

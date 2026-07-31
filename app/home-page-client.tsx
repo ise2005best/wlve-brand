@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import { AllProducts } from "./graphql/interfaces/all-products.interface";
-import ShippingCountriesDropdown from "./components/currency-selector";
 import ProductCard from "./components/product.card";
 const HomePage = ({ products }: { products: AllProducts }) => {
   const productNodes = products.products.edges.map((edge) => edge.node);
@@ -33,9 +32,6 @@ const HomePage = ({ products }: { products: AllProducts }) => {
             WLVE
           </p>
         </div>
-        <div className="absolute md:block hidden bottom-10 right-5 z-10">
-          <ShippingCountriesDropdown />
-        </div>
       </div>
       <div className="mx-6">
         <p className="font-secondary md:text-3xl text-lg uppercase mb-8 text-black leading-none mt-6 ">
@@ -47,9 +43,6 @@ const HomePage = ({ products }: { products: AllProducts }) => {
             ))}
         </div>
       </div>
-       <div className="absolute block md:hidden bottom-10 right-5 z-10">
-          <ShippingCountriesDropdown />
-        </div>
     </div>
   );
 };

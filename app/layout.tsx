@@ -5,6 +5,7 @@ import Navbar from "./components/navbar";
 import "./globals.css";
 import Footer from "./components/footer";
 import Providers from "./providers";
+import ShippingCountriesDropdown from "./components/currency-selector";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +37,9 @@ export default function RootLayout({
           <Analytics />
           <Navbar />
           {children}
+            <ShippingCountriesDropdown />
           <Footer />
+          
         </Providers>
       </body>
     </html>

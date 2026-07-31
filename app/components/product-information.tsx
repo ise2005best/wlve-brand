@@ -110,7 +110,7 @@ const ProductInformation = ({
         {productDetails?.title}
       </h1>
 
-      <p className="text-base md:text-3xl font-secondary md:font-secondary-regular text-black mb-3 tracking-wide">
+      <p className="text-base md:text-3xl font-secondary text-black mb-3 tracking-wide">
         {productDetails?.variants.edges[0]?.node.price.currencyCode} {price}
       </p>
 
