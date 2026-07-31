@@ -6,7 +6,7 @@ const HomePage = ({ products }: { products: AllProducts }) => {
   const productNodes = products.products.edges.map((edge) => edge.node);
   return (
     <div className="bg-white">
-      <div className="relative md:h-screen h-[45vh] w-screen bg-white">
+      <div className="relative md:h-screen h-[55vh] w-screen bg-white">
         <Image
           src="https://cdn.shopify.com/s/files/1/1047/8305/3145/files/IMG_5500.jpg?v=1785104283"
           alt="Hero"

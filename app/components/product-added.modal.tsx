@@ -58,7 +58,7 @@ export const ProductAddedModal = ({
 
           <div className="flex flex-col gap-2 min-w-0 flex-1">
             <div className="flex flex-row justify-between items-center gap-2">
-              <p className="font-secondary-regular md:text-xl text-base capitalize">
+              <p className="font-secondary-regular md:text-xl text-sm capitalize">
                 Product added to cart
               </p>
               <span className="h-px w-12 shrink-0 bg-white" />
@@ -78,7 +78,7 @@ export const ProductAddedModal = ({
               <button
                 type="button"
                 onClick={() => (window.location.href = "/cart")}
-                className="bg-white text-black md:px-8 px-4 capitalize py-2 font-secondary-regular md:text-base text-sm leading-none hover:bg-white/80 transition-colors"
+                className="bg-white text-black md:px-8 px-3 capitalize py-2 font-secondary-regular md:text-base text-xs leading-none hover:bg-white/80 transition-colors"
               >
                 Proceed to cart
               </button>
@@ -86,7 +86,7 @@ export const ProductAddedModal = ({
                 type="button"
                 onClick={() => checkoutMutation.mutate()}
                 disabled={checkoutMutation.isPending}
-                className="bg-black text-white border border-white md:px-8 px-4 py-2 font-secondary-regular md:text-base text-sm leading-none hover:bg-white/10 transition-colors disabled:opacity-60"
+                className="bg-black text-white border border-white md:px-3 px-4 py-2 font-secondary-regular md:text-base text-xs leading-none hover:bg-white/10 transition-colors disabled:opacity-60"
               >
                 {checkoutMutation.isPending ? "Processing..." : "Checkout"}
               </button>
