@@ -16,14 +16,17 @@ export const Navbar = () => {
   return (
     <div className="md:w-lg w-fit bg-black absolute z-50 mx-3 my-3 ">
       <div className="flex w-full px-2 flex-row justify-between items-center ">
-        <Image
-          src="https://cdn.shopify.com/s/files/1/1047/8305/3145/files/Logo.png_1.png?v=1785324772"
-          alt="Logo"
-          width={100}
-          height={100}
-          priority
-          className="md:w-20 md:h-20 w-16 h-16 object-contain "
-        />
+        <Link href="/">
+          <Image
+            src="https://cdn.shopify.com/s/files/1/1047/8305/3145/files/Logo.png_1.png?v=1785324772"
+            alt="Logo"
+            width={100}
+            height={100}
+            priority
+            className="md:w-20 md:h-20 w-16 h-16 object-contain "
+          />
+        </Link>
+
         <button
           type="button"
           onClick={() => setIsOpen((prev) => !prev)}
@@ -49,7 +52,9 @@ export const Navbar = () => {
 
       <div
         className={`flex flex-col md:gap-6 gap-4 px-4 text-white overflow-hidden transition-all duration-300 ease-in-out ${
-          isOpen ? "md:max-h-2xl max-h-lg py-6 opacity-100" : "max-h-0 py-0 opacity-0"
+          isOpen
+            ? "md:max-h-2xl max-h-lg py-6 opacity-100"
+            : "max-h-0 py-0 opacity-0"
         }`}
       >
         <nav className="flex flex-col gap-4">
@@ -72,14 +77,14 @@ export const Navbar = () => {
           })}
           <div className="md:mt-10 mt-4">
             <p className="font-secondary-regular uppercase text-white text-sm md:text-base">
-                With Love
+              With Love
             </p>
             <Image
-            src="https://cdn.shopify.com/s/files/1/1047/8305/3145/files/IMG_4246.jpg?v=1779191272"
-            alt="Logo"
-            width={2500}
-            height={2500}
-            className="md:w-full md:h-80 h-40 object-cover mt-6"
+              src="https://cdn.shopify.com/s/files/1/1047/8305/3145/files/IMG_4246.jpg?v=1779191272"
+              alt="Logo"
+              width={2500}
+              height={2500}
+              className="md:w-full md:h-80 h-40 object-cover mt-6"
             />
           </div>
         </nav>

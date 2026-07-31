@@ -27,6 +27,9 @@ const ProductInformation = ({
 }: InfoPanelProps) => {
   const productDetails = product.product;
   const [quantity, setQuantity] = useState(1);
+  const [selectedVariant, setSelectedVariant] = useState<string>(
+    productDetails.variants.edges[0].node.title,
+  )
   const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
   const { addToCart, updateItemQuantity } = useCartStore();
@@ -52,13 +55,15 @@ const ProductInformation = ({
       productDetails?.variants.edges[0]?.node.price.currencyCode || "",
     quantity: quantity,
     price: parseInt(price),
-    variant: "ONE SIZE",
+    variant: selectedVariant,
     variantId: selectedVariantId || "",
     vendor: productDetails?.vendor || "",
     productId: productDetails?.id || "",
     // use the first image as the main image
-    imageUrl: productDetails?.media.edges[0]?.node.image.url || "",
+    imageUrl: productDetails?.media.edges[1]?.node.image.url || "",
   };
+
+  console.log(selectedVariant, "selectedVariant");
 
   const addItemToCart = () => {
     addToCart(cartItem);
@@ -103,7 +108,7 @@ const ProductInformation = ({
       </h1>
 
       <p className="text-base md:text-3xl font-secondary md:font-secondary-regular text-black mb-3 tracking-wide">
-        £{price}
+        {productDetails?.variants.edges[0]?.node.price.currencyCode} {price}
       </p>
 
       <div className="bg-black h-px md:my-6 my-2 w-full" />
@@ -133,10 +138,12 @@ const ProductInformation = ({
                 return (
                   <button
                     key={value.id}
-                    onClick={() =>
-                      matchingVariant &&
-                      onSelectVariant(matchingVariant.node.id)
-                    }
+                    onClick={() => {
+                      if (matchingVariant) {
+                        onSelectVariant(matchingVariant.node.id);
+                        setSelectedVariant(matchingVariant.node.title);
+                      }
+                    }}
                     className={[
                       "px-7 py-1.5 border font-tertiary text-base rounded-md uppercase transition-all duration-150",
                       selectedVariantId === matchingVariant?.node.id

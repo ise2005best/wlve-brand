@@ -7,7 +7,6 @@ import { useState, useEffect } from "react";
 
 const ProductClient = ({ product }: { product: OneProduct }) => {
   const productDetails = product.product;
-  console.log(productDetails);
   const [selectedVariantId, setselectedVariantId] = useState<string>(
     productDetails.variants.edges[0].node.id,
   );
@@ -126,7 +125,7 @@ const ProductClient = ({ product }: { product: OneProduct }) => {
             )}
           </div>
 
-          <div className="w-[2px] bg-secondary self-stretch shrink-0" />
+          <div className="w-0.5 bg-secondary self-stretch shrink-0" />
 
           <div className="w-[40%] shrink-0 sticky top-6 self-start max-h-[calc(100vh-3rem)] overflow-y-auto">
             <div className="p-8 m-4">
