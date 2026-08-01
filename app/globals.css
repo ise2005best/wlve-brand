@@ -3,12 +3,32 @@
 @font-face {
   font-family: "The Seasons";
   font-style: normal;
-  src: url('../public/fonts/Fontspring-DEMO-theseasons-reg.otf');
+  src: url('/fonts/Fontspring-DEMO-theseasons-reg.otf');
 }
 @font-face {
-  font-family: "The Seasons";
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  src: url('/fonts/PlusJakartaSans-VariableFont_wght.ttf');
+}
+@font-face {
+  font-family: "The Seasons Italic";
   font-style: italic;
-  src: url('../public/fonts/Fontspring-DEMO-theseasons-it.otf');
+  src: url('/fonts/Fontspring-DEMO-theseasons-it.otf');
+}
+@font-face{
+  font-family: "Clash Display";
+  font-style: normal;
+  src: url("/fonts/ClashDisplay-Medium.otf");
+}
+@font-face{
+  font-family: "Clash Display Regular";
+  font-style: normal;
+  src: url("/fonts/ClashDisplay-Regular.otf");
+}
+@font-face{
+  font-family: "Clash Display Light";
+  font-style: normal;
+  src: url("/fonts/ClashDisplay-Light.otf");
 }
 
 
@@ -25,6 +45,10 @@
   --font-mono: var(--font-geist-mono);
   --color-primary: #EEB738; 
   --font-primary: "The Seasons", sans-serif;
+  --font-secondary: "Clash Display", sans-serif;
+  --font-secondary-light: "Clash Display Light", sans-serif;
+  --font-secondary-regular: "Clash Display Regular", sans-serif;
+  --font-tertiary: "Plus Jakarta Sans", sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
