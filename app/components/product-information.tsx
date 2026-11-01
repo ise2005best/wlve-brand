@@ -7,6 +7,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { cartProps } from "@/app/store/cart.interface";
 import { useCartStore } from "@/app/store/cart.store";
+import { formatPrice } from "@/app/utils/format.naira";
 import ProductAddedModal from "./product-added.modal";
 
 export interface InfoPanelProps {
@@ -34,7 +35,7 @@ const ProductInformation = ({
   );
   const [showSizeGuide, setShowSizeGuide] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
-  const { addToCart, updateItemQuantity } = useCartStore();
+  const { addToCart, updateItemQuantity, clearCart } = useCartStore();
   const sizeGuideImage = productDetails?.metafield2?.reference?.image;
 
   const increaseQuantity = () => {
@@ -64,8 +65,6 @@ const ProductInformation = ({
     // use the first image as the main image
     imageUrl: productDetails?.media.edges[1]?.node.image.url || "",
   };
-
-  console.log(selectedVariant, "selectedVariant");
 
   const addItemToCart = () => {
     setIsModalOpen(true);
@@ -100,7 +99,7 @@ const ProductInformation = ({
       id: "shipping",
       label: "Delivery & Shipping",
       content:
-        "We offer worldwide shipping. Orders are processed within 1-3 business days and arrive within 5-10 business days depending on your location. Free returns within 7 days of delivery.",
+        "We offer worldwide shipping. Orders are processed within 1-3 business days and arrive within 5-10 business days depending on your location. Returns accepted within 14 days of delivery, return shipping is paid by the customer.",
     },
   ];
 
@@ -111,7 +110,10 @@ const ProductInformation = ({
       </h1>
 
       <p className="text-base md:text-3xl font-secondary text-black mb-3 tracking-wide">
-        {productDetails?.variants.edges[0]?.node.price.currencyCode} {price}
+        {formatPrice(
+          price,
+          productDetails?.variants.edges[0]?.node.price.currencyCode ?? "",
+        )}
       </p>
 
       <div className="bg-black h-px md:my-6 my-2 w-full" />
@@ -269,6 +271,7 @@ const ProductInformation = ({
         quantity={quantity}
         setIsOpen={setIsModalOpen}
         isOpen={isModalOpen}
+        clearCart={clearCart}
       />
     </div>
   );

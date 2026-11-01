@@ -8,7 +8,16 @@ export const useCartStore = create(
         (set,get) => ({
             cartItems: [],
             addToCart:(cartItem: cartProps) => {
-                const cartItems = get().getCart();
+                let cartItems = get().getCart();
+
+                // The cart can only ever hold one currency: a mixed cart makes the
+                // total meaningless and Shopify's cartCreate rejects it at checkout.
+                // Switching country/currency therefore replaces the existing items.
+                const currentCurrency = cartItems[0]?.currencyCode;
+                if (currentCurrency && currentCurrency !== cartItem.currencyCode) {
+                    cartItems = [];
+                }
+
                 const existingItem = cartItems.find(item => item.productId === cartItem.productId && item.variantId === cartItem.variantId);
                 if (existingItem) {
                     // Update the quantity of the existing item

@@ -5,9 +5,10 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { useCartStore } from "@/app/store/cart.store";
 import { createCheckout } from "@/app/actions/checkout";
+import { formatPrice } from "@/app/utils/format.naira";
 
 const CartPage = () => {
-  const { cartItems, updateItemQuantity, removeItem } = useCartStore();
+  const { cartItems, updateItemQuantity, removeItem, clearCart } = useCartStore();
     const currencyCode = cartItems[0]?.currencyCode || "";
 
   const estimatedTotal = cartItems.reduce(
@@ -25,6 +26,7 @@ const CartPage = () => {
       ),
     onSuccess: (cart) => {
       window.location.href = cart.checkoutUrl;
+      clearCart(); 
     },
   });
 
@@ -85,7 +87,7 @@ const CartPage = () => {
                       {item.productName}
                     </p>
                     <p className="font-secondary-regular text-sm md:text-base text-black/60 mt-1">
-                      {item.currencyCode} {""} {item.price}
+                      {formatPrice(item.price, item.currencyCode)}
                     </p>
                     <p className="font-secondary-regular text-sm md:text-base text-black/60">
                       Size: {item.variant}
@@ -132,7 +134,7 @@ const CartPage = () => {
                 </div>
 
                 <span className="font-secondary-regular text-base md:text-lg text-black text-right">
-                  {item.currencyCode} {""}{item.price * item.quantity}
+                  {formatPrice(item.price * item.quantity, item.currencyCode)}
                 </span>
               </div>
             ))}
@@ -144,7 +146,7 @@ const CartPage = () => {
                 Estimated Total:
               </span>
               <span className="font-secondary text-lg md:text-xl text-black">
-                {currencyCode} {""}{estimatedTotal}
+                {formatPrice(estimatedTotal, currencyCode)}
               </span>
             </div>
             <p className="font-secondary-regular text-xs md:text-sm text-black/50 text-right max-w-xs">

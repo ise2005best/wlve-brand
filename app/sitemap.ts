@@ -11,6 +11,11 @@ import { SITE_URL as BASE_URL } from "./utils/site";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: `${BASE_URL}/`, changeFrequency: "daily", priority: 1 },
+    {
+      url: `${BASE_URL}/terms-of-service`,
+      changeFrequency: "yearly",
+      priority: 0.3,
+    },
   ];
 
   const productNodes: ProductHandleNode[] = [];
