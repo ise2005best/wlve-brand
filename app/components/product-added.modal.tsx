@@ -11,6 +11,7 @@ interface ProductAddedProps {
   quantity: number;
   productName: string;
   imageUrl: string;
+  clearCart: () => void;
 }
 
 export const ProductAddedModal = ({
@@ -20,6 +21,7 @@ export const ProductAddedModal = ({
   imageUrl,
   variantId,
   quantity,
+  clearCart,
 }: ProductAddedProps) => {
   const checkoutMutation = useMutation({
     mutationFn: () =>
@@ -31,6 +33,7 @@ export const ProductAddedModal = ({
       ]),
     onSuccess: (cart) => {
       window.location.href = cart.checkoutUrl;
+      clearCart(); 
     },
   });
 

@@ -41,6 +41,18 @@ const Footer = () => {
           © 2026
         </p>
         <Link
+          href="/terms-of-service"
+          className="font-secondary-regular lg:text-lg md:text-base text-sm leading-none uppercase"
+        >
+          Terms
+        </Link>
+        <Link
+          href="/terms-of-service#privacy-policy"
+          className="font-secondary-regular lg:text-lg md:text-base text-sm leading-none uppercase"
+        >
+          Privacy
+        </Link>
+        <Link
           href="https://x.com/wlve_brand?s=11"
           className="font-secondary-regular lg:text-lg md:text-base text-sm leading-none uppercase"
         >

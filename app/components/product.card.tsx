@@ -2,6 +2,7 @@
 import { ProductNode } from "../graphql/interfaces/all-products.interface";
 import Link from "next/link";
 import Image from "next/image";
+import { formatPrice } from "../utils/format.naira";
 
 interface ProductCardProps {
   product: ProductNode;
@@ -22,7 +23,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <div key={id}>
       <div className="w-full sm:w-36 md:w-80 h-full">
         <Link href={`/product/${handle}`}>
-          <div className="relative group overflow-hidden w-full h-[30vh] md:h-[50vh]">
+          <div className="relative group overflow-hidden w-full h-[35vh] md:h-[50vh]">
             {/* Main Image */}
             <Image
               src={mainImage}
@@ -54,12 +55,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             <div className="flex flex-col items-end whitespace-nowrap">
               {unitPrice && (
                 <p className="font-secondary-regular text-[10px] md:text-[14px] font-bold text-black">
-                   {unitPrice.currencyCode} {unitPrice.amount}
+                  {formatPrice(unitPrice.amount, unitPrice.currencyCode)}
                 </p>
               )}
               {price && (
                 <p className="font-secondary-regular text-[10px] md:text-[14px] font-bold text-black">
-                  {price.currencyCode} {price.amount}
+                  {formatPrice(price.amount, price.currencyCode)}
                 </p>
               )}
             </div>

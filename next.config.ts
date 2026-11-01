@@ -8,7 +8,16 @@ const nextConfig: NextConfig = {
         hostname: "cdn.shopify.com"
       }
     ],
-  }
+  },
+  async redirects() {
+    return [
+      {
+        source: "/privacy-policy",
+        destination: "/terms-of-service#privacy-policy",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
